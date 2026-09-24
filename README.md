@@ -1,6 +1,6 @@
-# Nguuma Portfolio
+# Nguuma-Portfolio
 
-A Next.js App Router portfolio starter for Nguuma Tsavbee.
+Personal engineering portfolio showcasing my work in backend development, cybersecurity, AI integration, and IoT.
 
 ## Getting started
 
