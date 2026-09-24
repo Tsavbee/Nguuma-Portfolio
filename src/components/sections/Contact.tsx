@@ -2,8 +2,9 @@ import { Container } from "@/components/layout/Container";
 
 export function Contact() {
 	return (
-		<section id="contact" className="border-t border-[var(--border)]" aria-labelledby="contact-title">
-			<Container className="grid gap-12 py-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-end lg:gap-24 lg:py-32">
+		<section id="contact" className="dark-section relative isolate overflow-hidden border-t border-[var(--border)]" aria-labelledby="contact-title">
+			<div className="section-image contact-network-image" aria-hidden="true" />
+			<Container className="relative z-10 grid gap-12 py-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:items-end lg:gap-24 lg:py-32">
 				<div>
 					<p className="font-mono text-sm tracking-[0.16em] text-[var(--cyan)]">04.</p>
 					<h2 id="contact-title" className="mt-5 max-w-2xl text-4xl font-semibold leading-tight tracking-[-0.06em] text-[var(--off-white)] sm:text-6xl">
