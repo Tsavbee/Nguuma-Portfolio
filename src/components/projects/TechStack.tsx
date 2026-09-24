@@ -1,0 +1,1 @@
+export function TechStack({ technologies }: { technologies: string[] }) { return <div className="actions">{technologies.map((technology) => <span className="button alt" key={technology}>{technology}</span>)}</div>; }

@@ -1,0 +1,1 @@
+export function ProjectGallery({ images }: { images: string[] }) { return <div className="grid">{images.map((image) => <div className="card" key={image}><span className="eyebrow">Asset</span><p>{image}</p></div>)}</div>; }

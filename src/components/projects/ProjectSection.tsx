@@ -1,0 +1,1 @@
+export function ProjectSection({ title, children }: { title: string; children: React.ReactNode }) { return <section className="section"><div className="container"><span className="eyebrow">{title}</span><div>{children}</div></div></section>; }
