@@ -44,7 +44,19 @@ npm run lint      # Run ESLint
 
 ## Assets
 
-Static assets live under `public/`, including project images, background artwork, icons, and the CV document. The portfolio background artwork is referenced from:
+Static assets live under `public/`, including project images, profile imagery, background artwork, icons, and the CV document. The Hero profile image is referenced from:
+
+```text
+/images/profile/Main Photo.png
+```
+
+Project cover images are stored under:
+
+```text
+/images/projects/
+```
+
+The portfolio background artwork is referenced from:
 
 ```text
 /images/backgrounds/Globe background white.png
