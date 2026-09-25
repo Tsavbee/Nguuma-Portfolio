@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Container } from "@/components/layout/Container";
 
 const focusAreas = ["Backend Development", "Cybersecurity", "AI Integration", "Internet of Things"];
@@ -37,40 +39,25 @@ export function Hero() {
 					</div>
 				</div>
 
-				<div className="relative aspect-[4/5] max-h-[560px] overflow-hidden border border-[var(--border)] bg-[var(--graphite-soft)] p-4 sm:p-5">
-					<div className="hero-visual-grid absolute inset-4 border border-[rgba(99,230,226,0.2)] sm:inset-5" aria-hidden="true">
-						<div className="hero-visual-line absolute left-[18%] top-[34%] w-[64%] rotate-[24deg]" />
-						<div className="hero-visual-line absolute left-[26%] top-[58%] w-[54%] -rotate-[18deg]" />
-						<div className="hero-visual-line absolute left-[50%] top-[22%] h-[54%] rotate-[14deg]" />
-						<div className="hero-visual-node absolute left-[15%] top-[29%] h-3 w-3" />
-						<div className="hero-visual-node absolute right-[17%] top-[27%] h-4 w-4 rounded-full" />
-						<div className="hero-visual-node absolute left-[24%] bottom-[34%] h-3 w-3 rounded-full" />
-						<div className="absolute left-[45%] top-[42%] h-16 w-16 rounded-full border border-[rgba(99,230,226,0.35)] sm:h-24 sm:w-24" />
-						<div className="absolute left-[calc(50%-1px)] top-[calc(42%+2rem)] h-10 border-l border-[rgba(99,230,226,0.3)] sm:top-[calc(42%+3rem)] sm:h-14" />
-					</div>
-					<div className="relative flex h-full flex-col justify-between p-2 sm:p-3">
-						<div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
-							<span>System map</span>
-							<span>01 / 04</span>
-						</div>
-						<div className="max-w-[13rem] self-end border-l border-[var(--cyan)] bg-[rgba(16,24,27,0.86)] py-3 pl-4">
-							<p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--cyan)]">Focused on</p>
-							<ul className="mt-3 space-y-1.5 text-xs leading-5 text-[var(--muted)]">
-								{focusAreas.map((area) => <li key={area}>{area}</li>)}
-							</ul>
+				<div className="relative aspect-[4/5] w-full max-h-[560px] overflow-hidden rounded-lg border border-[rgba(99,230,226,0.22)] bg-[var(--graphite-soft)]">
+					<Image
+						src="/images/profile/Main Photo.png"
+						alt="Nguuma Tsavbee"
+						fill
+						priority
+						sizes="(max-width: 768px) 100vw, 45vw"
+						className="object-cover object-center"
+					/>
+					<div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(11,16,18,0.96)] via-[rgba(11,16,18,0.72)] to-transparent px-4 pb-4 pt-20 sm:px-5 sm:pb-5">
+						<p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--cyan)]">Focused on</p>
+						<div className="mt-3 flex flex-wrap gap-2">
+							{focusAreas.map((area) => (
+								<span key={area} className="rounded-full border border-[rgba(99,230,226,0.38)] bg-[rgba(11,16,18,0.62)] px-2.5 py-1 text-[11px] leading-4 text-white backdrop-blur-sm">
+									{area}
+								</span>
+							))}
 						</div>
 					</div>
-				</div>
-			</Container>
-
-			<Container className="relative border-t border-[var(--border)] py-7">
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-					{focusAreas.map((area, index) => (
-						<div key={area} className="flex items-start gap-3 text-sm text-[var(--muted)]">
-							<span className="font-mono text-xs text-[var(--cyan)]">0{index + 1}</span>
-							<span>{area}</span>
-						</div>
-					))}
 				</div>
 			</Container>
 		</section>
