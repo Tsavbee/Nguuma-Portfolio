@@ -1,13 +1,21 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "@/types/project";
 
 export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
 	return (
 		<article className={`group relative grid gap-8 border-t border-[var(--border)] pt-8 transition-colors first:border-t-0 first:pt-0 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.78fr)] lg:items-center ${project.featured ? "lg:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)]" : index % 2 === 1 ? "lg:[&>div:first-child]:order-2" : ""}`}>
-			<div className={`relative flex min-h-56 items-end overflow-hidden border border-[var(--border)] bg-[var(--graphite-soft)] p-5 ${project.featured ? "min-h-80" : index === 3 ? "lg:min-h-64" : ""}`}>
-				<div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(99,230,226,0.12),transparent_38%)] opacity-80" />
-				<div className="absolute inset-5 border border-[rgba(99,230,226,0.16)]" />
-				<span className="relative font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">Project visual / pending</span>
+			<div className={`relative overflow-hidden border border-[var(--border)] bg-[var(--graphite-soft)] ${project.featured ? "min-h-80" : ""}`}>
+				<Image
+					src={project.cover}
+					alt={`${project.title} project preview`}
+					width={1600}
+					height={900}
+					sizes="(min-width: 1024px) 60vw, 100vw"
+					className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+					priority={project.featured}
+				/>
+				<div className="pointer-events-none absolute inset-0 bg-black/10" aria-hidden="true" />
 			</div>
 
 			<div className="flex flex-col lg:pt-2">
