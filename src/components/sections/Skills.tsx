@@ -13,15 +13,18 @@ export function Skills() {
 					</h2>
 				</div>
 
-				<div className="grid divide-y divide-[var(--light-border)] border-y border-[var(--light-border)] md:grid-cols-2 md:divide-x md:divide-y-0 lg:grid-cols-3">
-					{skills.map((group) => (
-						<article key={group.name} className="p-6">
-							<h3 className="text-xl font-medium tracking-[-0.03em] text-[var(--light-ink)]">{group.name}</h3>
-							<ul className="mt-5 space-y-3">
+				<div className="grid border-y border-[var(--light-border)] md:grid-cols-2 md:divide-x md:divide-[var(--light-border)] lg:grid-cols-3">
+					{skills.map((group, index) => (
+						<article key={group.name} className="border-b border-[var(--light-border)] py-7 first:pt-8 last:border-b-0 md:px-7 md:py-8 md:nth-[3n+1]:border-b-0 lg:px-8 lg:nth-[3n+1]:border-b-0 lg:nth-[3n+2]:border-b-0">
+							<div className="flex items-baseline gap-3">
+								<span className="font-mono text-[10px] tracking-[0.16em] text-[var(--cyan-deep)]">0{index + 1}</span>
+								<h3 className="text-lg font-semibold tracking-[-0.03em] text-[var(--light-ink)]">{group.name}</h3>
+							</div>
+							<ul className="mt-5 grid gap-x-5 gap-y-2.5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
 								{group.technologies.map((technology) => (
-									<li key={technology} className="flex items-center gap-3 text-sm text-[var(--light-muted)]">
-										<span className="h-1.5 w-1.5 rounded-full bg-[var(--cyan-deep)]" aria-hidden="true" />
-										{technology}
+									<li key={technology} className="group/item flex items-center gap-2.5 text-sm text-[var(--light-muted)] transition-colors hover:text-[var(--light-ink)]">
+										<span className="h-px w-3 bg-[var(--cyan-deep)] transition-all group-hover/item:w-5" aria-hidden="true" />
+										<span>{technology}</span>
 									</li>
 								))}
 							</ul>

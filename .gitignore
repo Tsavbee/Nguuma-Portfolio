@@ -1,7 +1,12 @@
-node_modules
-.next
+node_modules/
+.next/
 out
-.env*.local
+.env
+.env.*
+!.env.example
 *.db
 *.db-journal
+*.sqlite
+*.sqlite3
+*.tsbuildinfo
 .DS_Store
