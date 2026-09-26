@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "./Container";
+import { useContactModal } from "@/components/ui/ContactModalContext";
 
 const navigation = [
 	{ label: "Home", href: "/" },
@@ -11,10 +14,12 @@ const navigation = [
 const socials = [
 	{ label: "GitHub", href: "https://github.com/Tsavbee" },
 	{ label: "LinkedIn", href: "https://www.linkedin.com/in/nguuma-tsavbee-982261422" },
-	{ label: "Email", href: "mailto:ntsavbee@gmail.com" }
+	{ label: "Email" }
 ];
 
 export function Footer() {
+	const { openContactModal } = useContactModal();
+	const emailClassName = "transition-colors hover:text-[var(--cyan-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan-deep)]";
 	return (
 		<footer className="light-section relative isolate overflow-hidden border-t border-[var(--light-border)]" aria-label="Footer">
 			<div className="section-image footer-network-image" aria-hidden="true" />
@@ -30,7 +35,7 @@ export function Footer() {
 							{navigation.map((link) => <a key={link.label} className="transition-colors hover:text-[var(--light-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan-deep)]" href={link.href}>{link.label}</a>)}
 						</nav>
 						<nav className="flex flex-wrap gap-x-5 gap-y-2 text-[var(--light-muted)]" aria-label="Social links">
-							{socials.map((link) => <a key={link.label} className="transition-colors hover:text-[var(--cyan-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan-deep)]" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label} <span aria-hidden="true">↗</span></a>)}
+							{socials.map((link) => link.label === "Email" ? <button key={link.label} type="button" className={emailClassName} aria-haspopup="dialog" onClick={openContactModal}>{link.label} <span aria-hidden="true">↗</span></button> : <a key={link.label} className={emailClassName} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label} <span aria-hidden="true">↗</span></a>)}
 						</nav>
 					</div>
 				</div>

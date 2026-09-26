@@ -3,6 +3,7 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Container } from "@/components/layout/Container";
+import { useContactModal } from "@/components/ui/ContactModalContext";
 
 const initialForm = { name: "", email: "", subject: "", message: "", website: "" };
 
@@ -33,6 +34,7 @@ function SignalIcon() {
 }
 
 function ContactBody({ standalone = false }: { standalone?: boolean }) {
+	const { openContactModal } = useContactModal();
 	const [form, setForm] = useState(initialForm);
 	const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 	const Heading = standalone ? "h1" : "h2";
@@ -112,9 +114,9 @@ function ContactBody({ standalone = false }: { standalone?: boolean }) {
 			<div className="mt-7 border-t border-[var(--border)] pt-5">
 				<p className="mb-3 text-xs font-medium text-[var(--muted)]">Or connect with me</p>
 				<div className="flex flex-col gap-x-6 sm:flex-row sm:flex-wrap">
-					<a className="inline-flex min-h-10 items-center gap-2 border-b border-[var(--border)] text-sm text-[var(--off-white)] transition-colors hover:border-[var(--cyan)] hover:text-[var(--cyan)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cyan)] sm:border-0" href="mailto:ntsavbee@gmail.com">
+					<button type="button" className="inline-flex min-h-10 items-center gap-2 border-b border-[var(--border)] text-left text-sm text-[var(--off-white)] transition-colors hover:border-[var(--cyan)] hover:text-[var(--cyan)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cyan)] sm:border-0" aria-haspopup="dialog" onClick={openContactModal}>
 						<SignalIcon /><span>Email</span><span className="text-xs text-[var(--muted)]">ntsavbee@gmail.com</span>
-					</a>
+					</button>
 					<a className="inline-flex min-h-10 items-center gap-2 border-b border-[var(--border)] text-sm text-[var(--off-white)] transition-colors hover:border-[var(--cyan)] hover:text-[var(--cyan)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--cyan)] sm:border-0" href="https://github.com/Tsavbee" target="_blank" rel="noopener noreferrer">
 						<SignalIcon /><span>GitHub</span>
 					</a>

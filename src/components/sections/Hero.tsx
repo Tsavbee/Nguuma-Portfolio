@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 
 import { Container } from "@/components/layout/Container";
+import { useContactModal } from "@/components/ui/ContactModalContext";
 
 const focusAreas = ["Backend Development", "Cybersecurity", "AI Integration", "Internet of Things"];
 
 export function Hero() {
+	const { openContactModal } = useContactModal();
 	return (
 		<section className="dark-section relative isolate overflow-hidden" aria-labelledby="hero-title">
 			<div className="hero-network-image" aria-hidden="true" />
@@ -33,9 +37,9 @@ export function Hero() {
 						<a className="transition-colors hover:text-[var(--cyan)]" href="https://www.linkedin.com/in/nguuma-tsavbee-982261422" target="_blank" rel="noreferrer">
 							LinkedIn <span aria-hidden="true">↗</span>
 						</a>
-						<a className="transition-colors hover:text-[var(--cyan)]" href="mailto:ntsavbee@gmail.com">
+						<button type="button" className="transition-colors hover:text-[var(--cyan)]" aria-haspopup="dialog" onClick={openContactModal}>
 							Email <span aria-hidden="true">↗</span>
-						</a>
+						</button>
 					</div>
 				</div>
 

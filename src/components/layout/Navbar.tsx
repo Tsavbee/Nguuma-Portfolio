@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import Link from "next/link";
 import { Container } from "./Container";
-import { ContactModal } from "@/components/ui/ContactModal";
+import { useContactModal } from "@/components/ui/ContactModalContext";
 
 const links = [
 	{ label: "Home", href: "/" },
@@ -14,8 +13,7 @@ const links = [
 ];
 
 export function Navbar() {
-	const [isContactOpen, setIsContactOpen] = useState(false);
-	const closeContact = useCallback(() => setIsContactOpen(false), []);
+	const { isContactOpen, openContactModal } = useContactModal();
 
 	return (
 		<header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(11,16,18,0.96)]">
@@ -27,7 +25,7 @@ export function Navbar() {
 
 					<div className="ml-auto flex items-center gap-5 overflow-x-auto whitespace-nowrap text-xs text-[var(--muted)] sm:gap-6 sm:text-sm">
 						{links.map((link) => link.label === "Contact" ? (
-							<button key={link.href} type="button" onClick={() => setIsContactOpen(true)} aria-haspopup="dialog" aria-expanded={isContactOpen} className="shrink-0 bg-transparent p-0 text-left transition-colors hover:text-[var(--off-white)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan)]">
+							<button key={link.href} type="button" onClick={openContactModal} aria-haspopup="dialog" aria-expanded={isContactOpen} className="shrink-0 bg-transparent p-0 text-left transition-colors hover:text-[var(--off-white)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan)]">
 								{link.label}
 							</button>
 						) : (
@@ -52,7 +50,6 @@ export function Navbar() {
 					</a>
 				</nav>
 			</Container>
-			<ContactModal open={isContactOpen} onClose={closeContact} />
 		</header>
 	);
 }
