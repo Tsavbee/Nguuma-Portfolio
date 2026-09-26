@@ -35,7 +35,17 @@ export function Footer() {
 							{navigation.map((link) => <a key={link.label} className="transition-colors hover:text-[var(--light-ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan-deep)]" href={link.href}>{link.label}</a>)}
 						</nav>
 						<nav className="flex flex-wrap gap-x-5 gap-y-2 text-[var(--light-muted)]" aria-label="Social links">
-							{socials.map((link) => link.label === "Email" ? <button key={link.label} type="button" className={emailClassName} aria-haspopup="dialog" onClick={openContactModal}>{link.label} <span aria-hidden="true">↗</span></button> : <a key={link.label} className={emailClassName} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label} <span aria-hidden="true">↗</span></a>)}
+							{socials.map((link) => {
+								if (link.label === "Email") {
+									return <button key={link.label} type="button" className={emailClassName} aria-haspopup="dialog" onClick={openContactModal}>{link.label} <span aria-hidden="true">↗</span></button>;
+								}
+
+								if (!link.href) {
+									return null;
+								}
+
+								return <a key={link.label} className={emailClassName} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>{link.label} <span aria-hidden="true">↗</span></a>;
+							})}
 						</nav>
 					</div>
 				</div>
