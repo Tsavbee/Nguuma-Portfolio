@@ -1,55 +1,55 @@
 "use client";
 
 import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
 import { Container } from "./Container";
 import { useContactModal } from "@/components/ui/ContactModalContext";
-
-const links = [
-	{ label: "Home", href: "/" },
-	{ label: "About", href: "/#about" },
-	{ label: "Projects", href: "/projects" },
-	{ label: "Skills", href: "/#skills" },
-	{ label: "Contact", href: "/contact" }
-];
+import { NavigationDrawer } from "./NavigationDrawer";
 
 export function Navbar() {
-	const { isContactOpen, openContactModal } = useContactModal();
+	const { openContactModal } = useContactModal();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const menuButtonRef = useRef<HTMLButtonElement>(null);
+	const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+	const openContactFromMenu = useCallback(() => {
+		closeMenu();
+		openContactModal();
+	}, [closeMenu, openContactModal]);
 
 	return (
-		<header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(11,16,18,0.96)]">
-			<Container>
-				<nav className="flex min-h-16 items-center gap-6" aria-label="Main navigation">
-					<Link href="/" className="shrink-0 text-lg font-semibold tracking-[-0.08em] text-[var(--cyan)]" aria-label="Nguuma Tsavbee home">
-						NT.
-					</Link>
-
-					<div className="ml-auto flex items-center gap-5 overflow-x-auto whitespace-nowrap text-xs text-[var(--muted)] sm:gap-6 sm:text-sm">
-						{links.map((link) => link.label === "Contact" ? (
-							<button key={link.href} type="button" onClick={openContactModal} aria-haspopup="dialog" aria-expanded={isContactOpen} className="shrink-0 bg-transparent p-0 text-left transition-colors hover:text-[var(--off-white)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan)]">
-								{link.label}
-							</button>
-						) : (
-							<Link key={link.href} href={link.href} className="shrink-0 transition-colors hover:text-[var(--off-white)]">
-								{link.label}
-							</Link>
-						))}
-					</div>
-
-					<a
-						href="/documents/Nguuma_Tsavbee_CV.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Open Nguuma Tsavbee resume in a new tab"
-						className="inline-flex shrink-0 items-center gap-2 border border-[var(--cyan)] px-3 py-2 text-xs font-medium text-[var(--cyan)] transition-colors hover:bg-[var(--cyan)] hover:text-[var(--graphite)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan)] sm:px-4 sm:text-sm"
-					>
-						<svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-							<path d="M4 1.75h5l3 3v9.5H4v-12.5Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
-							<path d="M9 1.75v3h3M6 8h4M6 10.5h4" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-						<span>Resume</span>
-					</a>
-				</nav>
-			</Container>
-		</header>
+		<>
+			<header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(11,16,18,0.96)]">
+				<Container>
+					<nav className="flex min-h-16 items-center justify-between gap-6" aria-label="Main navigation">
+						<Link href="/" className="shrink-0 text-lg font-semibold tracking-[-0.08em] text-[var(--cyan)]" aria-label="Nguuma Tsavbee home">
+							NT.
+						</Link>
+						<button
+							ref={menuButtonRef}
+							type="button"
+							aria-label="Open navigation"
+							aria-expanded={isMenuOpen}
+							aria-controls="navigation-drawer"
+							onClick={() => setIsMenuOpen(true)}
+							className="inline-flex min-h-10 items-center gap-2.5 rounded-sm border border-[rgba(99,230,226,0.42)] px-3 text-xs font-medium text-[var(--off-white)] transition-colors hover:border-[var(--cyan)] hover:text-[var(--cyan)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--cyan)]"
+						>
+							<svg className="h-4 w-5 text-[var(--cyan)]" viewBox="0 0 20 16" fill="none" aria-hidden="true">
+								<path d="M4 3h12M4 8h12M4 13h12" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+								<circle cx="2.5" cy="3" r="1" fill="currentColor" />
+								<circle cx="17.5" cy="8" r="1" fill="currentColor" />
+								<circle cx="2.5" cy="13" r="1" fill="currentColor" />
+							</svg>
+							<span>Menu</span>
+						</button>
+					</nav>
+				</Container>
+			</header>
+			<NavigationDrawer
+				isOpen={isMenuOpen}
+				onClose={closeMenu}
+				onContact={openContactFromMenu}
+				triggerRef={menuButtonRef}
+			/>
+		</>
 	);
 }
